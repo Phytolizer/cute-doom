@@ -5,11 +5,15 @@
             "Specify structure for custom cmake functions"
         ],
         "additional_commands": {
-            "foo": {
-                "flags": ["BAR", "BAZ"],
+            "declare_module": {
+                "flags": ["INTERNAL_INCLUDE"],
                 "kwargs": {
-                    "HEADERS": "*",
+                    "KIND": 1,
+                    "TARGET_NAME": 1,
+                    "OUTPUT_NAME": 1,
+                    "INCLUDES": "*",
                     "SOURCES": "*",
+                    "ABSOLUTE_SOURCES": "*",
                     "DEPENDS": "*"
                 }
             }
