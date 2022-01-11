@@ -11,4 +11,4 @@ typedef struct {
 } doom_state_t;
 
 doom_state_t* doom_state_new(int argc, char** argv);
-void doom_state_free(doom_state_t* state);
+void doom_state_free(doom_state_t** p_state);
