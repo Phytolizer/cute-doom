@@ -18,6 +18,11 @@ void doom_init(int argc, char** argv) {
         s_print_version();
         doom_quit(0);
     }
+
+    doom_misc_detect_clashing_parameters();
+
+    doom_log_printf(doom_log_level_info, "\n");
+    s_print_version();
 }
 
 void doom_quit(int32_t exit_code) {
@@ -27,5 +32,5 @@ void doom_quit(int32_t exit_code) {
 
 void s_print_version(void) {
     char version_buffer[200];
-    doom_log_printf(doom_log_info, "%s\n", doom_sys_get_version_string(version_buffer, sizeof(version_buffer)));
+    doom_log_printf(doom_log_level_info, "%s\n", doom_sys_get_version_string(version_buffer, sizeof(version_buffer)));
 }

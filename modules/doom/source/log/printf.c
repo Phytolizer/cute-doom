@@ -1,5 +1,7 @@
 #include "doom/log/printf.h"
 
+#include "doom/sys/system.h"
+
 #include <assert.h>
 #include <stdarg.h>
 #include <stdint.h>
@@ -7,8 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const doom_log_level_t console_stdout_mask = doom_log_info;
-static const doom_log_level_t console_stderr_mask = doom_log_warn | doom_log_error;
+static const doom_log_level_t console_stdout_mask = doom_log_level_info;
+static const doom_log_level_t console_stderr_mask = doom_log_level_warn | doom_log_level_error;
 
 #define MAX_MESSAGE_LENGTH 2048
 
@@ -31,6 +33,18 @@ int32_t doom_log_printf(doom_log_level_t level, const char* format, ...) {
     }
 
     return result;
+}
+
+void doom_log_error(const char* format, ...) {
+    char error_message[MAX_MESSAGE_LENGTH];
+
+    va_list args;
+    va_start(args, format);
+    doom_vsnprintf(error_message, sizeof(error_message), format, args);
+    va_end(args);
+
+    doom_log_printf(doom_log_level_error, "%s\n", error_message);
+    doom_sys_safe_exit(-1);
 }
 
 int32_t doom_vsnprintf(char* buffer, size_t buffer_len, const char* format, va_list args) {
