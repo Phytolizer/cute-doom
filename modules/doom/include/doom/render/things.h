@@ -6,6 +6,9 @@
     X(dynamic_order)                                                                                                   \
     X(count)
 
+///
+/// \brief Sprite draw order.
+///
 typedef enum
 {
 #define X(x) doom_render_things_sprite_order_##x,

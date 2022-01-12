@@ -1,4 +1,9 @@
 #pragma once
 
 enum
-{ doom_hud_chat_macro_count = 10, };
+{
+    ///
+    /// \brief The number of chat macros.
+    ///
+    doom_hud_chat_macro_count = 10,
+};

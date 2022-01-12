@@ -6,6 +6,9 @@
     X(_full)                                                                                                           \
     X(_count)
 
+///
+/// \brief Specifies to what aspect ratio patches should be stretched.
+///
 typedef enum
 {
 #define X(x) doom_video_patch_stretch##x,

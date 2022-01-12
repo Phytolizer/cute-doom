@@ -1,4 +1,9 @@
 #pragma once
 
 enum
-{ doom_hud_crosshair_count = 8, };
+{
+    ///
+    /// \brief The number of crosshairs.
+    ///
+    doom_hud_crosshair_count = 8,
+};

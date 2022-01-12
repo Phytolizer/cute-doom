@@ -7,6 +7,9 @@
     X(follow, 0x08)                                                                                                    \
     X(grid, 0x10)
 
+///
+/// \brief Automap mode bitflags.
+///
 typedef enum
 {
 #define X(x, y) doom_automap_mode_##x = y,
@@ -20,6 +23,9 @@ typedef enum
     X(icon)                                                                                                            \
     X(count)
 
+///
+/// \brief The way things look on the automap.
+///
 typedef enum
 {
 #define X(x) doom_automap_things_appearance_##x,

@@ -25,6 +25,9 @@
     X(mbf21)                                                                                                           \
     X(max)
 
+///
+/// \brief Doom compatibility level.
+///
 typedef enum
 {
 #define X(x) doom_compatibility_level_##x,

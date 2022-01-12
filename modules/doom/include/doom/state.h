@@ -5,6 +5,7 @@
 #include "doom/hud/chat.h"
 #include "doom/misc/argv.h"
 #include "doom/misc/defaults.h"
+#include "doom/render/demo.h"
 #include "doom/render/draw.h"
 #include "doom/render/things.h"
 #include "doom/status_bar/ammo.h"
@@ -18,7 +19,12 @@
 #include <stdint.h>
 
 enum
-{ doom_maxloadfiles = 3, };
+{
+    ///
+    /// \brief The maximum number of autoload files (WAD and DEH alike).
+    ///
+    doom_maxloadfiles = 3,
+};
 
 #define DOOM_CENTERWEAPONS_X                                                                                           \
     X(off)                                                                                                             \
@@ -27,6 +33,9 @@ enum
     X(bob)                                                                                                             \
     X(count)
 
+///
+/// \brief How the weapon sprite should be centered.
+///
 typedef enum
 {
 #define X(x) doom_centerweapon_##x,
@@ -34,17 +43,33 @@ typedef enum
 #undef X
 } doom_centerweapon_t;
 
-typedef enum
-{
-    doom_armorcolortype_strength,
-    doom_armorcolortype_amount,
-} doom_armorcolortype_t;
+#define DOOM_ARMOR_COLOR_TYPES_X                                                                                       \
+    X(strength)                                                                                                        \
+    X(amount)
 
+///
+/// \brief Specifies how armor colorization should be done.
+///
 typedef enum
 {
-    doom_mus_pause_opt_kill,
-    doom_mus_pause_opt_pause,
-    doom_mus_pause_opt_continue,
+#define X(x) doom_armor_color_type_##x,
+    DOOM_ARMOR_COLOR_TYPES_X
+#undef X
+} doom_armor_color_type_t;
+
+#define DOOM_MUS_PAUSE_OPTS_X                                                                                          \
+    X(kill)                                                                                                            \
+    X(pause)                                                                                                           \
+    X(continue_playing)
+
+///
+/// \brief Specifies music behavior when the game is paused.
+///
+typedef enum
+{
+#define X(x) doom_mus_pause_opt_##x,
+    DOOM_MUS_PAUSE_OPTS_X
+#undef X
 } doom_mus_pause_opt_t;
 
 typedef struct {
@@ -81,7 +106,7 @@ typedef struct {
     bool sts_always_red;
     bool sts_pct_always_gray;
     bool sts_traditional_keys;
-    doom_armorcolortype_t sts_armorcolor_type;
+    doom_armor_color_type_t sts_armorcolor_type;
 
     // Dehacked settings
     bool deh_apply_cheats;
@@ -378,6 +403,51 @@ typedef struct {
     bool gl_texture_external_hires;
     bool gl_hires_override_pwads;
     phyto_string_span_t gl_texture_hires_dir;
+    bool gl_texture_hqresize;
+    doom_gl_struct_hqresizemode_t gl_texture_hqresize_textures;
+    doom_gl_struct_hqresizemode_t gl_texture_hqresize_sprites;
+    doom_gl_struct_hqresizemode_t gl_texture_hqresize_patches;
+    bool gl_motionblur;
+    phyto_string_span_t gl_motionblur_min_speed;
+    phyto_string_span_t gl_motionblur_min_angle;
+    phyto_string_span_t gl_motionblur_att_a;
+    phyto_string_span_t gl_motionblur_att_b;
+    phyto_string_span_t gl_motionblur_att_c;
+    doom_gl_struct_lightmode_t gl_lightmode;
+    int32_t gl_light_ambient;
+    bool gl_fog;
+    uint32_t gl_fog_color;
+    int32_t useglgamma;
+    bool gl_color_mip_levels;
+    bool gl_shadows;
+    int32_t gl_shadows_maxdist;
+    int32_t gl_shadows_factor;
+    bool gl_blend_animations;
+
+    // PrBoom+ emulation settings
+    bool overrun_spechit_warn;
+    bool overrun_spechit_emulate;
+    bool overrun_reject_warn;
+    bool overrun_reject_emulate;
+    bool overrun_intercept_warn;
+    bool overrun_intercept_emulate;
+    bool overrun_playeringame_warn;
+    bool overrun_playeringame_emulate;
+    bool overrun_donut_warn;
+    bool overrun_donut_emulate;
+    bool overrun_missedbackside_warn;
+    bool overrun_missedbackside_emulate;
+
+    // PrBoom+ compatibility with mapping errors
+    bool comperr_zerotag;
+    bool comperr_passuse;
+    bool comperr_hangsolid;
+    bool comperr_blockmap;
+    bool comperr_freeaim;
+
+    // PrBoom+ demo patterns list
+    phyto_string_span_t demo_patterns_mask;
+    doom_demo_patterns_list_t demo_patterns_list_def;
 } doom_state_t;
 
 doom_state_t* doom_state_new(int argc, char** argv);

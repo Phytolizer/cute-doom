@@ -209,9 +209,9 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "sts_armorcolor_type",
                                                     .location = {.pi = (int*)&doom_state->sts_armorcolor_type},
-                                                    .default_value = {.i = doom_armorcolortype_strength},
-                                                    .min_value = doom_armorcolortype_strength,
-                                                    .max_value = doom_armorcolortype_amount,
+                                                    .default_value = {.i = doom_armor_color_type_strength},
+                                                    .min_value = doom_armor_color_type_strength,
+                                                    .max_value = doom_armor_color_type_amount,
                                                     .type = doom_misc_default_type_integer,
                                                     .setup_screen = doom_misc_setup_screen_status_bar,
                                                 });
@@ -323,7 +323,7 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .location = {.pi = (int*)&doom_state->mus_pause_opt},
                                                     .default_value = {.i = doom_mus_pause_opt_pause},
                                                     .min_value = doom_mus_pause_opt_kill,
-                                                    .max_value = doom_mus_pause_opt_continue,
+                                                    .max_value = doom_mus_pause_opt_continue_playing,
                                                     .type = doom_misc_default_type_integer,
                                                     .setup_screen = doom_misc_setup_screen_none,
                                                 });

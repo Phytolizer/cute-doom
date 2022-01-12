@@ -4,6 +4,7 @@
 #include "phyto/string/string.h"
 
 #include <phyto/collections/dynamic_array.h>
+#include <phyto/string/string.h>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -17,6 +18,11 @@
     X(boolean, 2)                                                                                                      \
     X(color, 3)
 
+///
+/// \brief The type of a default.
+///
+/// Specifies which fields of the default are valid.
+///
 typedef enum
 {
 #define X(x, y) doom_misc_default_type_##x = y,
@@ -24,20 +30,45 @@ typedef enum
 #undef X
 } doom_misc_default_type_t;
 
+PHYTO_COLLECTIONS_DYNAMIC_ARRAY_DECL(doom_misc_default_array_value, phyto_string_t);
+
+///
+/// \brief A configured "default".
+///
 typedef struct {
+    ///
+    /// \brief The name of the default, for the config file.
+    ///
     const char* name;
 
+    ///
+    /// \brief The location of the default. The field that should be accessed is determined by the type.
+    ///
+    /// For integers, you may access `pi`.
+    /// For booleans, you may access `pb`.
+    /// For strings, you may access `ps`.
+    /// For arrays, you may access `array` and its members.
+    ///
     struct {
         int32_t* pi;
         bool* pb;
         phyto_string_span_t* ps;
         struct {
             int32_t* size;
-            char*** data;
+            doom_misc_default_array_value_t* data;
             int32_t index;
         } array;
     } location;
 
+    ///
+    /// \brief The value of the default, if it is not configured. The field that should be accessed is determined by the
+    /// type.
+    ///
+    /// For integers, you may access `i`.
+    /// For booleans, you may access `b`.
+    /// For strings, you may access `s`.
+    /// For arrays, you may access `array` and its members.
+    ///
     struct {
         int32_t i;
         bool b;
@@ -48,22 +79,58 @@ typedef struct {
         } array;
     } default_value;
 
+    ///
+    /// \brief The minimum value that may be configured, or `min_unset` for no minimum.
+    ///
     int32_t min_value;
+    ///
+    /// \brief The maximum value that may be configured, or `max_unset` for no maximum.
+    ///
     int32_t max_value;
 
+    ///
+    /// \brief The type of the default.
+    ///
     doom_misc_default_type_t type;
+
+    ///
+    /// \brief The setup screen on which the default is displayed.
+    ///
     int32_t setup_screen;
+
+    ///
+    /// \brief A pointer to the current value (?).
+    ///
     int32_t* current;
 
     // This must be pre-declared due to a cyclic dependency.
+
+    ///
+    /// \brief The setup menu on which the default is displayed.
+    ///
     struct doom_misc_setup_menu_s* setup_menu;
 
+    ///
+    /// \brief (DSDA-Doom) A unique identifier for this default.
+    ///
+    /// This is used to identify the default in the input configuration, because the DSDA subsystem doesn't use the
+    /// pointer fields.
+    ///
     int32_t identifier;
+
+    ///
+    /// \brief (DSDA-Doom) The default for an input, if it is not configured.
+    ///
+    /// Only input config options use this.
+    ///
     doom_dsda_input_default_t input;
 } doom_misc_default_t;
 
 PHYTO_COLLECTIONS_DYNAMIC_ARRAY_DECL(doom_misc_default_dyarray, doom_misc_default_t);
 
+///
+/// \brief Construct an array of defaults, already filled with the default values.
+///
 doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void);
 
 #define DOOM_MISC_SETUP_SCREENS_X                                                                                      \
@@ -77,6 +144,9 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void);
     X(general)                                                                                                         \
     X(max)
 
+///
+/// \brief Setup screens.
+///
 typedef enum
 {
 #define X(x) doom_misc_setup_screen_##x,

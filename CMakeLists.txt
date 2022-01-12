@@ -14,6 +14,15 @@ include(DeclareModule)
 configure_file(
     "${PROJECT_SOURCE_DIR}/cmake/config.h.cin" "${PROJECT_BINARY_DIR}/config.h"
 )
+configure_file(
+    "${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cin" "${PROJECT_BINARY_DIR}/Doxyfile"
+)
+add_custom_target(
+    "doxygen"
+    COMMAND doxygen
+    WORKING_DIRECTORY "${PROJECT_BINARY_DIR}"
+    DEPENDS "${PROJECT_BINARY_DIR}/Doxyfile"
+)
 
 declare_module(
     nonstd

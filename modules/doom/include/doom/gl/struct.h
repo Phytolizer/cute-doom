@@ -9,6 +9,9 @@
     X(linear_mipmap_linear)                                                                                            \
     X(count)
 
+///
+/// \brief Texture filter mode.
+///
 typedef enum
 {
 #define X(x) doom_gl_struct_filter_texture_mode_##x,
@@ -23,6 +26,9 @@ typedef enum
     X(on_8x)                                                                                                           \
     X(on_16x)
 
+///
+/// \brief Anisotropic mode.
+///
 typedef enum
 {
 #define X(x) doom_gl_struct_anisotropic_mode_##x,
@@ -38,6 +44,9 @@ typedef enum
     X(screen)                                                                                                          \
     X(count)
 
+///
+/// \brief Sky type.
+///
 typedef enum
 {
 #define X(x) doom_gl_struct_skytype_##x,
@@ -50,9 +59,54 @@ typedef enum
     X(always)                                                                                                          \
     X(smart)
 
+///
+/// \brief Sprite clip mode.
+///
 typedef enum
 {
 #define X(x) doom_gl_struct_spriteclipmode_##x,
     DOOM_GL_STRUCT_SPRITECLIPMODES_X
 #undef X
 } doom_gl_struct_spriteclipmode_t;
+
+#define DOOM_GL_STRUCT_HQRESIZEMODES_X                                                                                 \
+    X(none)                                                                                                            \
+    X(on_2x)                                                                                                           \
+    X(on_3x)                                                                                                           \
+    X(on_4x)                                                                                                           \
+    X(count)
+
+///
+/// \brief High-quality resize mode.
+///
+typedef enum
+{
+#define X(x) doom_gl_struct_hqresizemode_##x,
+    DOOM_GL_STRUCT_HQRESIZEMODES_X
+#undef X
+} doom_gl_struct_hqresizemode_t;
+
+#define DOOM_GL_STRUCT_LIGHTMODES_X                                                                                    \
+    X(glboom)                                                                                                          \
+    X(gzdoom)                                                                                                          \
+    X(fogbased)                                                                                                        \
+    X(shaders)                                                                                                         \
+    X(count)
+
+///
+/// \brief Light mode.
+///
+typedef enum
+{
+#define X(x) doom_gl_struct_lightmode_##x,
+    DOOM_GL_STRUCT_LIGHTMODES_X
+#undef X
+} doom_gl_struct_lightmode_t;
+
+enum
+{
+    ///
+    /// \brief Maximum OpenGL gamma value.
+    ///
+    doom_gl_struct_max_glgamma = 32,
+};

@@ -6,6 +6,11 @@
     X(yes)                                                                                                             \
     X(count)
 
+///
+/// \brief Ammo color behavior.
+///
+/// This is used to determine how the ammo color changes from green to blue.
+///
 typedef enum
 {
 #define X(x) doom_status_bar_ammo_color_behavior_##x,

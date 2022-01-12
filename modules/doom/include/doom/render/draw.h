@@ -7,6 +7,9 @@
     X(rounded)                                                                                                         \
     X(count)
 
+///
+/// \brief Filter type.
+///
 typedef enum
 {
 #define X(x) doom_render_draw_filter_type_##x,
@@ -18,6 +21,9 @@ typedef enum
     X(square)                                                                                                          \
     X(sloped)
 
+///
+/// \brief Sloped edge type.
+///
 typedef enum
 {
 #define X(x) doom_render_draw_sloped_edge_type_##x,

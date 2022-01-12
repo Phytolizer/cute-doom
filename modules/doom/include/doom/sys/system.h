@@ -10,6 +10,9 @@
     X(last)                                                                                                            \
     X(max)
 
+///
+/// \brief Exit priorities.
+///
 typedef enum
 {
 #define X(x) doom_sys_exit_priority_##x,
@@ -17,12 +20,33 @@ typedef enum
 #undef X
 } doom_sys_exit_priority_t;
 
+///
+/// \brief A callback upon exit.
+///
 typedef void (*doom_sys_atexit_func_t)(void);
 
+///
+/// \brief An entry in the linked list of exit functions.
+///
 typedef struct doom_sys_atexit_list_entry_s {
+    ///
+    /// \brief The callback to run.
+    ///
     doom_sys_atexit_func_t func;
+
+    ///
+    /// \brief Whether the callback should be run for a non-zero exit code.
+    ///
     bool run_if_error;
+
+    ///
+    /// \brief The name of the callback.
+    ///
     const char* name;
+
+    ///
+    /// \brief The next entry in the linked list.
+    ///
     struct doom_sys_atexit_list_entry_s* next;
 } doom_sys_atexit_list_entry_t;
 
