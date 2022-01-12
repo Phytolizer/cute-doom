@@ -72,8 +72,8 @@ typedef struct {
     int32_t demo_smoothturnsfactor;
 
     // Files
-    const char* wad_files[doom_maxloadfiles];
-    const char* deh_files[doom_maxloadfiles];
+    phyto_string_span_t wad_files[doom_maxloadfiles];
+    phyto_string_span_t deh_files[doom_maxloadfiles];
 
     // Game settings
     int32_t default_skill;
@@ -102,9 +102,9 @@ typedef struct {
     doom_mus_pause_opt_t mus_pause_opt;
     // Renamed from default_numChannels
     int32_t snd_channels;
-    const char* snd_midiplayer;
-    const char* snd_soundfont;
-    const char* snd_mididev;
+    phyto_string_span_t snd_midiplayer;
+    phyto_string_span_t snd_soundfont;
+    phyto_string_span_t snd_mididev;
     bool full_sounds;
     bool mus_fluidsynth_chorus;
     bool mus_fluidsynth_reverb;
@@ -112,9 +112,9 @@ typedef struct {
     int32_t mus_opl_gain;
 
     // Video settings
-    const char* videomode;
-    const char* screen_resolution;
-    const char* custom_resolution;
+    phyto_string_span_t videomode;
+    phyto_string_span_t screen_resolution;
+    phyto_string_span_t custom_resolution;
     bool use_fullscreen;
     bool exclusive_fullscreen;
     bool gl_exclusive_fullscreen;
@@ -159,7 +159,7 @@ typedef struct {
     doom_gl_struct_filter_texture_mode_t gl_sprite_filter;
     doom_gl_struct_filter_texture_mode_t gl_patch_filter;
     doom_gl_struct_anisotropic_mode_t gl_texture_filter_anisotropic;
-    const char* gl_tex_format_string;
+    phyto_string_span_t gl_tex_format_string;
     int32_t gl_sprite_offset;
     bool gl_sprite_blend;
     int32_t gl_mask_sprite_threshold;
@@ -182,7 +182,7 @@ typedef struct {
     int32_t use_joystick;
 
     // Chat macros
-    const char* chat_macros[doom_hud_chat_macro_count];
+    phyto_string_span_t chat_macros[doom_hud_chat_macro_count];
 
     // Automap settings
     int32_t mapcolor_back;
@@ -274,8 +274,8 @@ typedef struct {
     bool mouse_carrytics;
 
     // PrBoom+ demo settings
-    const char* demo_demoex_filename;
-    const char* getwad_cmdline;
+    phyto_string_span_t demo_demoex_filename;
+    phyto_string_span_t getwad_cmdline;
     bool demo_overwriteexisting;
     int32_t quickstart_window_ms;
 
@@ -288,7 +288,7 @@ typedef struct {
 
     // PrBoom+ misc settings
     bool showendoom;
-    const char* screenshot_dir;
+    phyto_string_span_t screenshot_dir;
     bool health_bar;
     bool health_bar_full_length;
     int32_t health_bar_red;
@@ -318,7 +318,7 @@ typedef struct {
         bool coordinate_display;
         bool skip_quit_prompt;
         bool show_split_data;
-        const char* player_name;
+        phyto_string_span_t player_name;
         int32_t quickstart_cache_tics;
         int32_t death_use_action;
         bool mute_sfx;
@@ -333,16 +333,16 @@ typedef struct {
     } dsda;
 
     // Video capture encoding settings
-    const char* cap_soundcommand;
-    const char* cap_videocommand;
-    const char* cap_muxcommand;
-    const char* cap_tempfile1;
-    const char* cap_tempfile2;
+    phyto_string_span_t cap_soundcommand;
+    phyto_string_span_t cap_videocommand;
+    phyto_string_span_t cap_muxcommand;
+    phyto_string_span_t cap_tempfile1;
+    phyto_string_span_t cap_tempfile2;
     bool cap_remove_tempfiles;
     int32_t cap_fps;
 
     // PrBoom+ video settings
-    const char* sdl_video_window_pos;
+    phyto_string_span_t sdl_video_window_pos;
     bool palette_ondamage;
     bool palette_onbonus;
     bool palette_onpowers;
@@ -377,7 +377,7 @@ typedef struct {
     bool gl_texture_internal_hires;
     bool gl_texture_external_hires;
     bool gl_hires_override_pwads;
-    const char* gl_texture_hires_dir;
+    phyto_string_span_t gl_texture_hires_dir;
 } doom_state_t;
 
 doom_state_t* doom_state_new(int argc, char** argv);

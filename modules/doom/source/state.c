@@ -3,6 +3,7 @@
 #include "doom/misc/argv.h"
 #include "doom/misc/defaults.h"
 #include "doom/sys/system.h"
+#include "phyto/string/string.h"
 
 #include <nonstd/strdup.h>
 #include <stddef.h>
@@ -22,8 +23,8 @@ doom_state_t* doom_state_new(int argc, char** argv) {
     state->defaults = doom_misc_default_dyarray_new();
     state->process_priority = 0;
     for (size_t i = 0; i < doom_maxloadfiles; ++i) {
-        state->wad_files[i] = NULL;
-        state->deh_files[i] = NULL;
+        state->wad_files[i] = phyto_string_span_empty();
+        state->deh_files[i] = phyto_string_span_empty();
     }
     return state;
 }

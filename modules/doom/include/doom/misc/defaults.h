@@ -1,6 +1,7 @@
 #pragma once
 
 #include "doom/dsda/input.h"
+#include "phyto/string/string.h"
 
 #include <phyto/collections/dynamic_array.h>
 #include <stdbool.h>
@@ -29,7 +30,7 @@ typedef struct {
     struct {
         int32_t* pi;
         bool* pb;
-        const char** psz;
+        phyto_string_span_t* ps;
         struct {
             int32_t* size;
             char*** data;
@@ -40,10 +41,10 @@ typedef struct {
     struct {
         int32_t i;
         bool b;
-        const char* sz;
+        phyto_string_span_t s;
         struct {
             int32_t size;
-            const char** data;
+            phyto_string_span_t* data;
         } array;
     } default_value;
 

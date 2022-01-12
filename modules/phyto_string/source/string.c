@@ -42,5 +42,9 @@ phyto_string_t phyto_string_new(void) {
 }
 
 phyto_string_t phyto_string_from_c(const char* c) {
-    return phyto_string_init_from_span(&phyto_string_callbacks, phyto_string_span_from_array(c, strlen(c)));
+    return phyto_string_init_from_span(&phyto_string_callbacks, phyto_string_span_from_c(c));
+}
+
+phyto_string_span_t phyto_string_span_from_c(const char* c) {
+    return phyto_string_span_from_array(c, strlen(c));
 }

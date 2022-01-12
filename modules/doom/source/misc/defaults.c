@@ -3,6 +3,7 @@
 #include "doom/init.h"
 #include "doom/render/demo.h"
 #include "doom/state.h"
+#include "phyto/string/string.h"
 
 #include <config.h>
 
@@ -124,8 +125,8 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
     doom_misc_default_dyarray_append(&defaults, s_header_default("Files"));
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "wadfile_1",
-                                                    .location = {.psz = &doom_state->wad_files[1]},
-                                                    .default_value = {.sz = ""},
+                                                    .location = {.ps = &doom_state->wad_files[1]},
+                                                    .default_value = {.s = phyto_string_span_empty()},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,
@@ -133,8 +134,8 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                 });
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "wadfile_2",
-                                                    .location = {.psz = &doom_state->wad_files[2]},
-                                                    .default_value = {.sz = ""},
+                                                    .location = {.ps = &doom_state->wad_files[2]},
+                                                    .default_value = {.s = phyto_string_span_empty()},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,
@@ -142,8 +143,8 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                 });
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "dehfile_1",
-                                                    .location = {.psz = &doom_state->deh_files[0]},
-                                                    .default_value = {.sz = ""},
+                                                    .location = {.ps = &doom_state->deh_files[0]},
+                                                    .default_value = {.s = phyto_string_span_empty()},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,
@@ -151,8 +152,8 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                 });
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "dehfile_2",
-                                                    .location = {.psz = &doom_state->deh_files[1]},
-                                                    .default_value = {.sz = ""},
+                                                    .location = {.ps = &doom_state->deh_files[1]},
+                                                    .default_value = {.s = phyto_string_span_empty()},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,
@@ -337,26 +338,27 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                 });
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "snd_midiplayer",
-                                                    .location = {.psz = &doom_state->snd_midiplayer},
-                                                    .default_value = {.sz = "fluidsynth"},
+                                                    .location = {.ps = &doom_state->snd_midiplayer},
+                                                    .default_value = {.s = phyto_string_span_from_c("fluidsynth")},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,
                                                     .setup_screen = doom_misc_setup_screen_none,
                                                 });
-    doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
-                                                    .name = "snd_soundfont",
-                                                    .location = {.psz = &doom_state->snd_soundfont},
-                                                    .default_value = {.sz = "soundfonts/" PROJECT_NAME ".sf2"},
-                                                    .min_value = min_unset,
-                                                    .max_value = max_unset,
-                                                    .type = doom_misc_default_type_string,
-                                                    .setup_screen = doom_misc_setup_screen_none,
-                                                });
+    doom_misc_default_dyarray_append(
+        &defaults, (doom_misc_default_t){
+                       .name = "snd_soundfont",
+                       .location = {.ps = &doom_state->snd_soundfont},
+                       .default_value = {.s = phyto_string_span_from_c("soundfonts/" PROJECT_NAME ".sf2")},
+                       .min_value = min_unset,
+                       .max_value = max_unset,
+                       .type = doom_misc_default_type_string,
+                       .setup_screen = doom_misc_setup_screen_none,
+                   });
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "snd_mididev",
-                                                    .location = {.psz = &doom_state->snd_mididev},
-                                                    .default_value = {.sz = ""},
+                                                    .location = {.ps = &doom_state->snd_mididev},
+                                                    .default_value = {.s = phyto_string_span_empty()},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,
@@ -411,8 +413,8 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
     doom_misc_default_dyarray_append(&defaults, s_header_default("Video settings"));
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "videomode",
-                                                    .location = {.psz = &doom_state->videomode},
-                                                    .default_value = {.sz = "Software"},
+                                                    .location = {.ps = &doom_state->videomode},
+                                                    .default_value = {.s = phyto_string_span_from_c("Software")},
                                                     .min_value = min_unset,
                                                     .max_value = max_unset,
                                                     .type = doom_misc_default_type_string,

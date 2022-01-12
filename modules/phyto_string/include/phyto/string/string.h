@@ -11,3 +11,5 @@ int32_t phyto_string_compare(phyto_string_t a, phyto_string_t b);
 
 phyto_string_t phyto_string_new(void);
 phyto_string_t phyto_string_from_c(const char* c);
+
+phyto_string_span_t phyto_string_span_from_c(const char* c);
