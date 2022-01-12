@@ -12,6 +12,7 @@
 #include "doom/sys/compatibility.h"
 #include "doom/sys/system.h"
 #include "doom/video/patch.h"
+#include "doom/weapons.h"
 
 #include <phyto/string/string.h>
 #include <stdbool.h>
@@ -448,6 +449,9 @@ typedef struct {
     // PrBoom+ demo patterns list
     phyto_string_span_t demo_patterns_mask;
     doom_demo_patterns_list_t demo_patterns_list_def;
+
+    // Weapon preferences
+    int32_t weapon_preferences[2][doom_weapon_type_count + 1];
 } doom_state_t;
 
 doom_state_t* doom_state_new(int argc, char** argv);
