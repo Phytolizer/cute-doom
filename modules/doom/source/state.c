@@ -17,15 +17,7 @@ doom_state_t* doom_state_new(int argc, char** argv) {
     for (int i = 0; i < argc; i++) {
         doom_misc_parameters_append(&state->params, phyto_string_from_c(argv[i]));
     }
-    for (doom_sys_exit_priority_t ep = doom_sys_exit_priority_first; ep < doom_sys_exit_priority_max; ep++) {
-        state->exit_funcs[ep] = NULL;
-    }
     state->defaults = doom_misc_default_dyarray_new();
-    state->process_priority = 0;
-    for (size_t i = 0; i < doom_maxloadfiles; ++i) {
-        state->wad_files[i] = phyto_string_span_empty();
-        state->deh_files[i] = phyto_string_span_empty();
-    }
     return state;
 }
 
