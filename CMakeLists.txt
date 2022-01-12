@@ -27,11 +27,17 @@ declare_module(
             strspn.c
             strtok.c
 )
+declare_module(phyto_span KIND interface)
+declare_module(
+    phyto_collections
+    KIND interface
+    DEPENDS phyto_span
+)
 declare_module(
     doom
     KIND library
-    SOURCES init.c log/printf.c misc/argv.c state.c sys/system.c
-    DEPENDS nonstd
+    SOURCES init.c log/printf.c misc/argv.c misc/defaults.c state.c sys/system.c
+    DEPENDS nonstd phyto_collections
     INCLUDES "${PROJECT_BINARY_DIR}"
 )
 declare_module(
