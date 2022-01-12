@@ -171,7 +171,7 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                 });
     doom_misc_default_dyarray_append(&defaults, (doom_misc_default_t){
                                                     .name = "weapon_attack_alignment",
-                                                    .location = {.pi = &doom_state->weapon_attack_alignment},
+                                                    .location = {.pi = (int*)&doom_state->weapon_attack_alignment},
                                                     .default_value = {.i = doom_centerweapon_off},
                                                     .min_value = doom_centerweapon_off,
                                                     .max_value = doom_centerweapon_bob,

@@ -7,3 +7,6 @@ typedef struct {
     int32_t mouse_button;
     int32_t joystick_button;
 } doom_dsda_input_default_t;
+
+enum
+{ doom_dsda_input_profile_count = 3, };

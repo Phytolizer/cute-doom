@@ -2,6 +2,7 @@
 
 #include "doom/init.h"
 #include "doom/log/printf.h"
+#include "phyto/string/string.h"
 
 #include <nonstd/ctype.h>
 #include <nonstd/strdup.h>
@@ -11,31 +12,42 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-int32_t doom_misc_check_parameter(const char* parameter) {
-    return doom_misc_check_parameter_ex(parameter, doom_state->argv, doom_state->argc);
+PHYTO_COLLECTIONS_DYNAMIC_ARRAY_IMPL(doom_misc_parameters, phyto_string_t);
+
+static const doom_misc_parameters_callbacks_t doom_misc_parameters_callbacks = {
+    .free_cb = phyto_string_free,
+    .compare_cb = phyto_string_compare,
+    .copy_cb = phyto_string_copy,
+    .print_cb = phyto_string_print_nosep,
+};
+
+doom_misc_parameters_t doom_misc_parameters_new(void) {
+    return doom_misc_parameters_init(&doom_misc_parameters_callbacks);
 }
 
-int32_t doom_misc_check_parameter_ex(const char* parameter, char** params, int32_t params_len) {
-    for (int32_t i = 0; i < params_len; i++) {
-        if (nonstd_stricmp(params[i], parameter) == 0) {
-            return i;
+int32_t doom_misc_check_parameter(const char* parameter) {
+    return doom_misc_check_parameter_ex(parameter, doom_state->params);
+}
+
+int32_t doom_misc_check_parameter_ex(const char* parameter, doom_misc_parameters_t params) {
+    for (size_t i = 0; i < params.size; i++) {
+        char* nt = nonstd_strndup(params.data[i].data, params.data[i].size);
+        if (nonstd_stricmp(nt, parameter) == 0) {
+            free(nt);
+            return (int32_t)i;
         }
+        free(nt);
     }
     return -1;
 }
 
 void doom_misc_add_parameter(const char* parameter) {
-    doom_state->argv = realloc(doom_state->argv, sizeof(char*) * (doom_state->argc + 1));
-    doom_state->argv[doom_state->argc] = nonstd_strdup(parameter);
-    doom_state->argc++;
+    doom_misc_parameters_append(&doom_state->params, phyto_string_from_c(parameter));
 }
 
-void doom_misc_parse_command_line(char* cmd_start, char** argv, char* args, int32_t* out_argv_len,
-                                  int32_t* out_args_len) {
+void doom_misc_parse_command_line(char* cmd_start, doom_misc_parameters_t* out_params) {
     char* p = cmd_start;
-
-    *out_args_len = 0;
-    *out_argv_len = 0;
+    *out_params = doom_misc_parameters_new();
     bool in_quote = false;
 
     // each argument
@@ -50,10 +62,7 @@ void doom_misc_parse_command_line(char* cmd_start, char** argv, char* args, int3
         }
 
         // store pointer to arg
-        if (argv) {
-            *argv++ = args;
-        }
-        ++(*out_argv_len);
+        phyto_string_t arg = phyto_string_new();
 
         // scan one argument
         while (true) {
@@ -88,10 +97,7 @@ void doom_misc_parse_command_line(char* cmd_start, char** argv, char* args, int3
 
             // copy remaining slashes
             while (num_slashes--) {
-                if (args) {
-                    *args++ = '\\';
-                }
-                ++(*out_args_len);
+                phyto_string_append(&arg, '\\');
             }
 
             // detect end of argument
@@ -100,18 +106,12 @@ void doom_misc_parse_command_line(char* cmd_start, char** argv, char* args, int3
             }
 
             if (copy_char) {
-                if (args) {
-                    *args++ = *p;
-                }
-                ++(*out_args_len);
+                phyto_string_append(&arg, *p);
             }
             ++p;
         }
 
-        if (args) {
-            *args++ = '\0';
-        }
-        ++(*out_args_len);
+        doom_misc_parameters_append(out_params, arg);
     }
 }
 

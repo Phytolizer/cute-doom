@@ -31,13 +31,19 @@ declare_module(phyto_span KIND interface)
 declare_module(
     phyto_collections
     KIND interface
-    DEPENDS phyto_span
+    DEPENDS phyto_span nonstd
+)
+declare_module(
+    phyto_string
+    KIND library
+    SOURCES string.c
+    DEPENDS phyto_collections
 )
 declare_module(
     doom
     KIND library
     SOURCES init.c log/printf.c misc/argv.c misc/defaults.c state.c sys/system.c
-    DEPENDS nonstd phyto_collections
+    DEPENDS nonstd phyto_collections phyto_string
     INCLUDES "${PROJECT_BINARY_DIR}"
 )
 declare_module(
