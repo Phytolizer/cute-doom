@@ -445,6 +445,70 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .max_value = doom_render_draw_filter_type_rounded,
                                                     .setup_screen = doom_misc_setup_screen_none,
                                                 }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "filter_floor",
+                                                    .location = (int*)&doom_state->defaults_storage.filter_floor,
+                                                    .default_value = doom_render_draw_filter_type_point,
+                                                    .min_value = doom_render_draw_filter_type_point,
+                                                    .max_value = doom_render_draw_filter_type_rounded,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "filter_sprite",
+                                                    .location = (int*)&doom_state->defaults_storage.filter_sprite,
+                                                    .default_value = doom_render_draw_filter_type_point,
+                                                    .min_value = doom_render_draw_filter_type_point,
+                                                    .max_value = doom_render_draw_filter_type_rounded,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "filter_z",
+                                                    .location = (int*)&doom_state->defaults_storage.filter_z,
+                                                    .default_value = doom_render_draw_filter_type_point,
+                                                    .min_value = doom_render_draw_filter_type_point,
+                                                    .max_value = doom_render_draw_filter_type_linear,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "filter_patch",
+                                                    .location = (int*)&doom_state->defaults_storage.filter_patch,
+                                                    .default_value = doom_render_draw_filter_type_point,
+                                                    .min_value = doom_render_draw_filter_type_point,
+                                                    .max_value = doom_render_draw_filter_type_rounded,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "filter_threshold",
+                                                    .location = &doom_state->defaults_storage.filter_threshold,
+                                                    .default_value = 49152,
+                                                    .min_value = 0,
+                                                    .max_value = max_unset,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "sprite_edges",
+                                                    .location = (int*)&doom_state->defaults_storage.sprite_edges,
+                                                    .default_value = doom_render_draw_sloped_edge_type_square,
+                                                    .min_value = doom_render_draw_sloped_edge_type_square,
+                                                    .max_value = doom_render_draw_sloped_edge_type_sloped,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "patch_edges",
+                                                    .location = (int*)&doom_state->defaults_storage.patch_edges,
+                                                    .default_value = doom_render_draw_sloped_edge_type_square,
+                                                    .min_value = doom_render_draw_sloped_edge_type_square,
+                                                    .max_value = doom_render_draw_sloped_edge_type_sloped,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("OpenGL settings"));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_compatibility",
+                                                    .location = &doom_state->defaults_storage.gl_compatibility,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
 
     return defaults;
 }
