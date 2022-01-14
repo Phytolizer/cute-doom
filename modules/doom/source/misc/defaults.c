@@ -1,5 +1,6 @@
 #include "doom/misc/defaults.h"
 
+#include "doom/gl/struct.h"
 #include "doom/init.h"
 #include "doom/render/demo.h"
 #include "doom/render/draw.h"
@@ -507,8 +508,220 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .name = "gl_compatibility",
                                                     .location = &doom_state->defaults_storage.gl_compatibility,
                                                     .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_arb_multitexture",
+                                                    .location = &doom_state->defaults_storage.gl_arb.multitexture,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_arb_texture_compression",
+                                         .location = &doom_state->defaults_storage.gl_arb.texture_compression,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_arb_texture_non_power_of_two",
+                                         .location = &doom_state->defaults_storage.gl_arb.texture_non_power_of_two,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_ext_arb_vertex_buffer_object",
+                                         .location = &doom_state->defaults_storage.gl_ext.arb_vertex_buffer_object,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_arb_pixel_buffer_object",
+                                         .location = &doom_state->defaults_storage.gl_arb.pixel_buffer_object,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_arb_shader_objects",
+                                                    .location = &doom_state->defaults_storage.gl_arb.shader_objects,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_ext_blend_color",
+                                                    .location = &doom_state->defaults_storage.gl_ext.blend_color,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_ext_framebuffer_object",
+                                                    .location = &doom_state->defaults_storage.gl_ext.framebuffer_object,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_ext_packed_depth_stencil",
+                                         .location = &doom_state->defaults_storage.gl_ext.packed_depth_stencil,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_ext_texture_filter_anisotropic",
+                                         .location = &doom_state->defaults_storage.gl_ext.texture_filter_anisotropic,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_use_stencil",
+                                                    .location = &doom_state->defaults_storage.gl_use_stencil,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_use_display_lists",
+                                                    .location = &doom_state->defaults_storage.gl_use_display_lists,
+                                                    .default_value = false,
                                                     .setup_screen = doom_misc_setup_screen_none,
                                                 }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_finish",
+                                                    .location = &doom_state->defaults_storage.gl_finish,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_clear",
+                                                    .location = &doom_state->defaults_storage.gl_clear,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_ztrick",
+                                                    .location = &doom_state->defaults_storage.gl_ztrick,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_nearclip",
+                                                    .location = &doom_state->defaults_storage.gl_nearclip,
+                                                    .default_value = 5,
+                                                    .min_value = 0,
+                                                    .max_value = max_unset,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_colorbuffer_bits",
+                                                    .location = &doom_state->defaults_storage.gl_colorbuffer_bits,
+                                                    .default_value = 32,
+                                                    .min_value = 16,
+                                                    .max_value = 32,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_depthbuffer_bits",
+                                                    .location = &doom_state->defaults_storage.gl_depthbuffer_bits,
+                                                    .default_value = 24,
+                                                    .min_value = 16,
+                                                    .max_value = 32,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "gl_texture_filter",
+                                         .location = (int*)&doom_state->defaults_storage.gl_texture_filter,
+                                         .default_value = doom_gl_struct_filter_texture_mode_nearest_mipmap_linear,
+                                         .min_value = doom_gl_struct_filter_texture_mode_nearest,
+                                         .max_value = doom_gl_struct_filter_texture_mode_count - 1,
+                                         .setup_screen = doom_misc_setup_screen_none,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "gl_sprite_filter",
+                                         .location = (int*)&doom_state->defaults_storage.gl_sprite_filter,
+                                         .default_value = doom_gl_struct_filter_texture_mode_nearest,
+                                         .min_value = doom_gl_struct_filter_texture_mode_nearest,
+                                         .max_value = doom_gl_struct_filter_texture_mode_linear_mipmap_nearest,
+                                         .setup_screen = doom_misc_setup_screen_none,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_patch_filter",
+                                                    .location = (int*)&doom_state->defaults_storage.gl_patch_filter,
+                                                    .default_value = doom_gl_struct_filter_texture_mode_nearest,
+                                                    .min_value = doom_gl_struct_filter_texture_mode_nearest,
+                                                    .max_value = doom_gl_struct_filter_texture_mode_linear,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "gl_texture_filter_anisotropic",
+                                         .location = (int*)&doom_state->defaults_storage.gl_texture_filter_anisotropic,
+                                         .default_value = doom_gl_struct_anisotropic_mode_on_8x,
+                                         .min_value = doom_gl_struct_anisotropic_mode_off,
+                                         .max_value = doom_gl_struct_anisotropic_mode_on_16x,
+                                         .setup_screen = doom_misc_setup_screen_none,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "gl_tex_format_string",
+                                                    .location = &doom_state->defaults_storage.gl_tex_format_string,
+                                                    .default_value = phyto_string_span_from_c("GL_RGBA"),
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_sprite_offset",
+                                                    .location = &doom_state->defaults_storage.gl_sprite_offset,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 5,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_sprite_blend",
+                                                    .location = &doom_state->defaults_storage.gl_sprite_blend,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_mask_sprite_threshold",
+                                                    .location = &doom_state->defaults_storage.gl_mask_sprite_threshold,
+                                                    .default_value = 50,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_skymode",
+                                                    .location = (int*)&doom_state->defaults_storage.gl_skymode,
+                                                    .default_value = doom_gl_struct_skytype_auto,
+                                                    .min_value = doom_gl_struct_skytype_auto,
+                                                    .max_value = doom_gl_struct_skytype_count - 1,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "gl_sky_detail",
+                                                    .location = &doom_state->defaults_storage.gl_sky_detail,
+                                                    .default_value = 16,
+                                                    .min_value = 1,
+                                                    .max_value = 32,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "gl_use_paletted_texture",
+                                                    .location = &doom_state->defaults_storage.gl_use_paletted_texture,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "gl_use_shared_texture_palette",
+                                         .location = &doom_state->defaults_storage.gl_use_shared_texture_palette,
+                                         .default_value = false,
+                                         .setup_screen = doom_misc_setup_screen_none,
+                                     }));
 
     return defaults;
 }

@@ -307,6 +307,7 @@ typedef struct {
         bool arb_vertex_buffer_object;
         bool blend_color;
         bool framebuffer_object;
+        bool packed_depth_stencil;
         bool texture_filter_anisotropic;
     } gl_ext;
     bool gl_use_stencil;

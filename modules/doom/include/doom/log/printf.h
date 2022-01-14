@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdnoreturn.h>
 
 #define DOOM_LOG_LEVELS_X                                                                                              \
     X(info, 0x1U)                                                                                                      \
@@ -36,7 +37,7 @@ int32_t doom_log_printf(doom_log_level_t level, const char* format, ...) __attri
 ///
 /// \brief Log an error and exit.
 ///
-void doom_log_error(const char* format, ...) __attribute__((format(printf, 1, 2))) __attribute__((noreturn));
+noreturn void doom_log_error(const char* format, ...) __attribute__((format(printf, 1, 2)));
 
 ///
 /// \brief Non-standard version of vsnprintf. Could go in the `nonstd` library.

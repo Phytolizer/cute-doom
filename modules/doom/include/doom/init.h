@@ -3,6 +3,7 @@
 #include "doom/state.h"
 
 #include <stdint.h>
+#include <stdnoreturn.h>
 
 ///
 /// \brief The state of Doom.
@@ -27,4 +28,4 @@ void doom_init(int argc, char** argv);
 ///
 /// This is meant to be called directly by main().
 ///
-void doom_quit(int32_t exit_code) __attribute__((noreturn));
+noreturn void doom_quit(int32_t exit_code);

@@ -25,7 +25,7 @@ void doom_init(int argc, char** argv) {
     s_print_version();
 }
 
-void doom_quit(int32_t exit_code) {
+noreturn void doom_quit(int32_t exit_code) {
     doom_state_free(&doom_state);
     exit(exit_code);
 }

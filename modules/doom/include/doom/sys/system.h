@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdnoreturn.h>
 
 #define DOOM_SYS_EXIT_PRIORITIES_X                                                                                     \
     X(first)                                                                                                           \
@@ -79,4 +80,4 @@ const char* doom_sys_get_version_string(char* buffer, size_t buffer_len);
 ///
 /// \param exit_code The exit code to exit with.
 ///
-void doom_sys_safe_exit(int32_t exit_code) __attribute__((noreturn));
+noreturn void doom_sys_safe_exit(int32_t exit_code);
