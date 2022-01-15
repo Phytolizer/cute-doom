@@ -78,7 +78,7 @@ typedef enum
     X(hex_integer, 3)                                                                                                  \
     X(array, 4)                                                                                                        \
     X(input, 5)                                                                                                        \
-    X(boolean, 2)                                                                                                      \
+    X(boolean, 6)                                                                                                      \
     X(color, 3)
 
 ///
@@ -114,6 +114,7 @@ typedef struct {
     ///
     struct {
         int32_t* pi;
+        uint32_t* px;
         bool* pb;
         phyto_string_span_t* ps;
         struct {
@@ -134,6 +135,7 @@ typedef struct {
     ///
     struct {
         int32_t i;
+        uint32_t x;
         bool b;
         phyto_string_span_t s;
         struct {
@@ -228,7 +230,7 @@ typedef struct {
     // Renamed from bodyquesize
     int32_t max_player_corpse;
     bool flashing_hom;
-    int32_t endoom_mode;
+    uint32_t endoom_mode;
     bool level_precache;
     bool demo_smoothturns;
     int32_t demo_smoothturnsfactor;
@@ -522,7 +524,7 @@ typedef struct {
     doom_render_things_sprite_order_t sprites_doom_order;
     bool movement_mouselook;
     bool movement_mousenovert;
-    int32_t movement_mouseviewpitch;
+    int32_t movement_maxviewpitch;
     int32_t movement_mousestrafedivisor;
     bool movement_mouseinvert;
 
