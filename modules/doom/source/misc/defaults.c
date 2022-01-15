@@ -3,12 +3,14 @@
 #include "doom/automap.h"
 #include "doom/dsda/input.h"
 #include "doom/gl/struct.h"
+#include "doom/hud/crosshair.h"
 #include "doom/hud/strings.h"
 #include "doom/init.h"
 #include "doom/keys.h"
 #include "doom/render/demo.h"
 #include "doom/render/draw.h"
 #include "doom/state.h"
+#include "doom/status_bar/ammo.h"
 #include "phyto/string/string.h"
 
 #include <config.h>
@@ -2076,6 +2078,602 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                      }));
 
     doom_misc_default_dyarray_append(&defaults, s_header_default("Heads-up display settings"));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_titl",
+                                                    .location = &doom_state->defaults_storage.hudcolor_titl,
+                                                    .default_value = 5,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_xyco",
+                                                    .location = &doom_state->defaults_storage.hudcolor_xyco,
+                                                    .default_value = 3,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_mapstat_title",
+                                                    .location = &doom_state->defaults_storage.hudcolor_mapstat_title,
+                                                    .default_value = 6,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_mapstat_value",
+                                                    .location = &doom_state->defaults_storage.hudcolor_mapstat_value,
+                                                    .default_value = 2,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_mapstat_time",
+                                                    .location = &doom_state->defaults_storage.hudcolor_mapstat_time,
+                                                    .default_value = 2,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_mesg",
+                                                    .location = &doom_state->defaults_storage.hudcolor_mesg,
+                                                    .default_value = 6,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_messages,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_chat",
+                                                    .location = &doom_state->defaults_storage.hudcolor_chat,
+                                                    .default_value = 5,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_messages,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudcolor_list",
+                                                    .location = &doom_state->defaults_storage.hudcolor_list,
+                                                    .default_value = 5,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_messages,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hud_msg_lines",
+                                                    .location = &doom_state->defaults_storage.hud_msg_lines,
+                                                    .default_value = 1,
+                                                    .min_value = 1,
+                                                    .max_value = 16,
+                                                    .setup_screen = doom_misc_setup_screen_messages,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hud_list_bgon",
+                                                    .location = &doom_state->defaults_storage.hud_list_bgon,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_messages,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "health_red",
+                                                    .location = &doom_state->defaults_storage.health_red,
+                                                    .default_value = 25,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "health_yellow",
+                                                    .location = &doom_state->defaults_storage.health_yellow,
+                                                    .default_value = 50,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "health_green",
+                                                    .location = &doom_state->defaults_storage.health_green,
+                                                    .default_value = 100,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "armor_red",
+                                                    .location = &doom_state->defaults_storage.armor_red,
+                                                    .default_value = 25,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "armor_yellow",
+                                                    .location = &doom_state->defaults_storage.armor_yellow,
+                                                    .default_value = 50,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "armor_green",
+                                                    .location = &doom_state->defaults_storage.armor_green,
+                                                    .default_value = 100,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "ammo_red",
+                                                    .location = &doom_state->defaults_storage.ammo_red,
+                                                    .default_value = 25,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "ammo_yellow",
+                                                    .location = &doom_state->defaults_storage.ammo_yellow,
+                                                    .default_value = 50,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "ammo_color_behavior",
+                                                    .location = (int*)&doom_state->defaults_storage.ammo_color_behavior,
+                                                    .default_value = doom_status_bar_ammo_color_behavior_count - 1,
+                                                    .min_value = 0,
+                                                    .max_value = doom_status_bar_ammo_color_behavior_count - 1,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hud_num",
+                                                    .location = &doom_state->defaults_storage.hud_num,
+                                                    .default_value = 6,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hud_displayed",
+                                                    .location = &doom_state->defaults_storage.hud_displayed,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("PrBoom+ heads-up display settings"));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_gamespeed",
+                                                    .location = &doom_state->defaults_storage.hudadd_gamespeed,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_leveltime",
+                                                    .location = &doom_state->defaults_storage.hudadd_leveltime,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_demotime",
+                                                    .location = &doom_state->defaults_storage.hudadd_demotime,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_secretarea",
+                                                    .location = &doom_state->defaults_storage.hudadd_secretarea,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_maxtotals",
+                                                    .location = &doom_state->defaults_storage.hudadd_maxtotals,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_demoprogressbar",
+                                                    .location = &doom_state->defaults_storage.hudadd_demoprogressbar,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudadd_crosshair",
+                                                    .location = &doom_state->defaults_storage.hudadd_crosshair,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = doom_hud_crosshair_count - 1,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_crosshair_scale",
+                                                    .location = &doom_state->defaults_storage.hudadd_crosshair_scale,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "hudadd_crosshair_color",
+                                                    .location = &doom_state->defaults_storage.hudadd_crosshair_color,
+                                                    .default_value = 3,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_crosshair_health",
+                                                    .location = &doom_state->defaults_storage.hudadd_crosshair_health,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "hudadd_crosshair_target",
+                                                    .location = &doom_state->defaults_storage.hudadd_crosshair_target,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "hudadd_crosshair_target_color",
+                                         .location = &doom_state->defaults_storage.hudadd_crosshair_target_color,
+                                         .default_value = 9,
+                                         .min_value = 0,
+                                         .max_value = 9,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "hudadd_crosshair_lock_target",
+                                         .location = &doom_state->defaults_storage.hudadd_crosshair_lock_target,
+                                         .default_value = false,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("PrBoom+ mouse settings"));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mouse_acceleration",
+                                                    .location = &doom_state->defaults_storage.mouse_acceleration,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = max_unset,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mouse_sensitivity_mlook",
+                                                    .location = &doom_state->defaults_storage.mouse_sensitivity_mlook,
+                                                    .default_value = 10,
+                                                    .min_value = 0,
+                                                    .max_value = max_unset,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "mouse_doubleclick_as_use",
+                                                    .location = &doom_state->defaults_storage.mouse_doubleclick_as_use,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "mouse_carrytics",
+                                                    .location = &doom_state->defaults_storage.mouse_carrytics,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("PrBoom+ demo settings"));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "demo_demoex_filename",
+                                                    .location = &doom_state->defaults_storage.demo_demoex_filename,
+                                                    .default_value = phyto_string_span_empty(),
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "getwad_cmdline",
+                                                    .location = &doom_state->defaults_storage.getwad_cmdline,
+                                                    .default_value = phyto_string_span_empty(),
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "demo_overwriteexisting",
+                                                    .location = &doom_state->defaults_storage.demo_overwriteexisting,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "quickstart_window_ms",
+                                                    .location = &doom_state->defaults_storage.quickstart_window_ms,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 1000,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("PrBoom+ game settings"));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "movement_strafe50",
+                                                    .location = &doom_state->defaults_storage.movement_strafe50,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "movement_strafe50onturns",
+                                                    .location = &doom_state->defaults_storage.movement_strafe50onturns,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "movement_shorttics",
+                                                    .location = &doom_state->defaults_storage.movement_shorttics,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "interpolation_maxobjects",
+                                                    .location = &doom_state->defaults_storage.interpolation_maxobjects,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = max_unset,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "speed_step",
+                                                    .location = &doom_state->defaults_storage.speed_step,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 1000,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("PrBoom+ miscellaneous settings"));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "showendoom",
+                                                    .location = &doom_state->defaults_storage.showendoom,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "screenshot_dir",
+                                                    .location = &doom_state->defaults_storage.screenshot_dir,
+                                                    .default_value = phyto_string_span_empty(),
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "health_bar",
+                                                    .location = &doom_state->defaults_storage.health_bar,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "health_bar_full_length",
+                                                    .location = &doom_state->defaults_storage.health_bar_full_length,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "health_bar_red",
+                                                    .location = &doom_state->defaults_storage.health_bar_red,
+                                                    .default_value = 50,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "health_bar_yellow",
+                                                    .location = &doom_state->defaults_storage.health_bar_yellow,
+                                                    .default_value = 99,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "health_bar_green",
+                                                    .location = &doom_state->defaults_storage.health_bar_green,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("DSDA-Doom settings"));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_strict_mode",
+                                                    .location = &doom_state->defaults_storage.dsda.strict_mode,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_cycle_ghost_colors",
+                                                    .location = &doom_state->defaults_storage.dsda.cycle_ghost_colors,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "dsda_auto_key_frame_interval",
+                                         .location = &doom_state->defaults_storage.dsda.auto_key_frame_interval,
+                                         .default_value = 1,
+                                         .min_value = 1,
+                                         .max_value = 600,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "dsda_auto_key_frame_depth",
+                                                    .location = &doom_state->defaults_storage.dsda.auto_key_frame_depth,
+                                                    .default_value = 60,
+                                                    .min_value = 1,
+                                                    .max_value = 600,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "dsda_auto_key_frame_timeout",
+                                         .location = &doom_state->defaults_storage.dsda.auto_key_frame_timeout,
+                                         .default_value = 10,
+                                         .min_value = 0,
+                                         .max_value = 25,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_exhud",
+                                                    .location = &doom_state->defaults_storage.dsda.exhud,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_wipe_at_full_speed",
+                                                    .location = &doom_state->defaults_storage.dsda.wipe_at_full_speed,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_show_demo_attempts",
+                                                    .location = &doom_state->defaults_storage.dsda.show_demo_attempts,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "dsda_fine_sensitivity",
+                                                    .location = &doom_state->defaults_storage.dsda.fine_sensitivity,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 99,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_hide_horns",
+                                                    .location = &doom_state->defaults_storage.dsda.hide_horns,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_organized_saves",
+                                                    .location = &doom_state->defaults_storage.dsda.organized_saves,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_command_display",
+                                                    .location = &doom_state->defaults_storage.dsda.command_display,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "dsda_command_history_size",
+                                                    .location = &doom_state->defaults_storage.dsda.command_history_size,
+                                                    .default_value = 10,
+                                                    .min_value = 1,
+                                                    .max_value = 20,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_hide_empty_commands",
+                                                    .location = &doom_state->defaults_storage.dsda.hide_empty_commands,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_coordinate_display",
+                                                    .location = &doom_state->defaults_storage.dsda.coordinate_display,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_skip_quit_prompt",
+                                                    .location = &doom_state->defaults_storage.dsda.skip_quit_prompt,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_show_split_data",
+                                                    .location = &doom_state->defaults_storage.dsda.show_split_data,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "dsda_player_name",
+                                                    .location = &doom_state->defaults_storage.dsda.player_name,
+                                                    .default_value = phyto_string_span_from_c("Anonymous"),
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "dsda_quickstart_cache_tics",
+                                         .location = &doom_state->defaults_storage.dsda.quickstart_cache_tics,
+                                         .default_value = 0,
+                                         .min_value = 0,
+                                         .max_value = 35,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "dsda_death_use_action",
+                                                    .location = &doom_state->defaults_storage.dsda.death_use_action,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 2,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_mute_sfx",
+                                                    .location = &doom_state->defaults_storage.dsda.mute_sfx,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_mute_music",
+                                                    .location = &doom_state->defaults_storage.dsda.mute_music,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_cheat_codes",
+                                                    .location = &doom_state->defaults_storage.dsda.cheat_codes,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_allow_jumping",
+                                                    .location = &doom_state->defaults_storage.dsda.allow_jumping,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "dsda_parallel_sfx_limit",
+                                                    .location = &doom_state->defaults_storage.dsda.parallel_sfx_limit,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 32,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "dsda_parallel_sfx_window",
+                                                    .location = &doom_state->defaults_storage.dsda.parallel_sfx_window,
+                                                    .default_value = 1,
+                                                    .min_value = 1,
+                                                    .max_value = 32,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_boolean_default((boolean_default_t){
+                                         .name = "dsda_switch_when_ammo_runs_out",
+                                         .location = &doom_state->defaults_storage.dsda.switch_when_ammo_runs_out,
+                                         .default_value = true,
+                                         .setup_screen = doom_misc_setup_screen_status_bar,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_viewbob",
+                                                    .location = &doom_state->defaults_storage.dsda.viewbob,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "dsda_weaponbob",
+                                                    .location = &doom_state->defaults_storage.dsda.weaponbob,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_status_bar,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("Video capture encoding settings"));
 
     return defaults;
 }
