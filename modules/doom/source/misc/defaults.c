@@ -1,7 +1,9 @@
 #include "doom/misc/defaults.h"
 
+#include "doom/dsda/input.h"
 #include "doom/gl/struct.h"
 #include "doom/init.h"
+#include "doom/keys.h"
 #include "doom/render/demo.h"
 #include "doom/render/draw.h"
 #include "doom/state.h"
@@ -49,11 +51,19 @@ typedef struct {
     doom_misc_setup_screen_t setup_screen;
 } integer_default_t;
 
+typedef struct {
+    const char* name;
+    doom_misc_setup_screen_t setup_screen;
+    doom_dsda_input_identifier_t identifier;
+    doom_dsda_input_default_t input;
+} input_default_t;
+
 static doom_misc_default_t s_header_default(const char* name);
 static doom_misc_default_t s_boolean_default(boolean_default_t value);
 static doom_misc_default_t s_string_default(string_default_t value);
 static doom_misc_default_t s_integer_default(integer_default_t value);
 static doom_misc_default_t s_hexint_default(integer_default_t value);
+static doom_misc_default_t s_input_default(input_default_t value);
 
 doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
     doom_misc_default_dyarray_t defaults = doom_misc_default_dyarray_init(&sc_default_dyarray_callbacks);
@@ -723,6 +733,59 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                          .setup_screen = doom_misc_setup_screen_none,
                                      }));
 
+    doom_misc_default_dyarray_append(&defaults, s_header_default("Input settings"));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "input_profile",
+                                                    .location = &doom_state->defaults_storage.input_profile,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = doom_dsda_input_profile_count - 1,
+                                                    .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_forward",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_forward,
+                                                    .input = {.key = 'w', .mouse_button = 2, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_backward",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_backward,
+                                                    .input = {.key = 's', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_turnleft",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_turn_left,
+                                                    .input = {.key = 'e', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_turnright",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_turn_right,
+                                                    .input = {.key = 'q', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_speed",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_speed,
+                       .input = {.key = doom_key_right_shift, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_strafeleft",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_strafe_left,
+                                                    .input = {.key = 'a', .mouse_button = -1, .joystick_button = 4},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_straferight",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_strafe_right,
+                                                    .input = {.key = 'd', .mouse_button = -1, .joystick_button = 5},
+                                                }));
+
     return defaults;
 }
 
@@ -784,5 +847,17 @@ doom_misc_default_t s_hexint_default(integer_default_t value) {
         .max_value = value.max_value,
         .type = doom_misc_default_type_hex_integer,
         .setup_screen = value.setup_screen,
+    };
+}
+
+doom_misc_default_t s_input_default(input_default_t value) {
+    return (doom_misc_default_t){
+        .name = value.name,
+        .min_value = min_unset,
+        .max_value = max_unset,
+        .type = doom_misc_default_type_input,
+        .setup_screen = value.setup_screen,
+        .identifier = value.identifier,
+        .input = value.input,
     };
 }
