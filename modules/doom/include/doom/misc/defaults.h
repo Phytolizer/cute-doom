@@ -79,6 +79,7 @@ typedef enum
     X(array, 4)                                                                                                        \
     X(input, 5)                                                                                                        \
     X(boolean, 6)                                                                                                      \
+    X(owning_string, 7)                                                                                                \
     X(color, 3)
 
 ///
@@ -108,8 +109,10 @@ typedef struct {
     /// \brief The location of the default. The field that should be accessed is determined by the type.
     ///
     /// For integers, you may access `pi`.
+    /// For hex integers, you may access `px`.
     /// For booleans, you may access `pb`.
     /// For strings, you may access `ps`.
+    /// For owning strings, you may access `pos`.
     /// For arrays, you may access `array` and its members.
     ///
     struct {
@@ -117,6 +120,7 @@ typedef struct {
         uint32_t* px;
         bool* pb;
         phyto_string_span_t* ps;
+        phyto_string_t* pos;
         struct {
             int32_t* size;
             doom_misc_default_array_value_t* data;
@@ -129,6 +133,7 @@ typedef struct {
     /// type.
     ///
     /// For integers, you may access `i`.
+    /// For hex integers, you may access `x`.
     /// For booleans, you may access `b`.
     /// For strings, you may access `s`.
     /// For arrays, you may access `array` and its members.

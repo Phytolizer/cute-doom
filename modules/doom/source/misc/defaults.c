@@ -75,12 +75,20 @@ typedef struct {
     doom_dsda_input_default_t input;
 } input_default_t;
 
+typedef struct {
+    const char* name;
+    phyto_string_t* location;
+    phyto_string_span_t default_value;
+    doom_misc_setup_screen_t setup_screen;
+} owning_string_default_t;
+
 static doom_misc_default_t s_header_default(const char* name);
 static doom_misc_default_t s_boolean_default(boolean_default_t value);
 static doom_misc_default_t s_string_default(string_default_t value);
 static doom_misc_default_t s_integer_default(integer_default_t value);
 static doom_misc_default_t s_hexint_default(hexint_default_t value);
 static doom_misc_default_t s_input_default(input_default_t value);
+static doom_misc_default_t s_owning_string_default(owning_string_default_t value);
 
 doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
     static_assert(sizeof(doom_compatibility_level_t) == sizeof(int), "i can't cast enums to ints");
@@ -3232,14 +3240,154 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .default_value = phyto_string_span_from_c("demo_pattern"),
                                                     .setup_screen = doom_misc_setup_screen_none,
                                                 }));
-    // doom_misc_default_dyarray_append(
-    //     &defaults, s_string_default((string_default_t){
-    //                    .name = "demo_pattern0",
-    //                    .location = &doom_state->defaults_storage.demo_patterns_list_def.data[0],
-    //                    .default_value = phyto_string_span_from_c(
-    //                        "DOOM 2: Hell on Earth/((lv)|(nm)|(pa)|(ty))\\d\\d.\\d\\d\\d\\.lmp/doom2.wad"),
-    //                    .setup_screen = doom_misc_setup_screen_none,
-    //                }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_owning_string_default((owning_string_default_t){
+                       .name = "demo_pattern0",
+                       .location = &doom_state->defaults_storage.demo_patterns_list_def.data[0],
+                       .default_value = phyto_string_span_from_c(
+                           "DOOM 2: Hell on Earth/((lv)|(nm)|(pa)|(ty))\\d\\d.\\d\\d\\d\\.lmp/doom2.wad"),
+                       .setup_screen = doom_misc_setup_screen_none,
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults,
+        s_owning_string_default((owning_string_default_t){
+            .name = "demo_pattern1",
+            .location = &doom_state->defaults_storage.demo_patterns_list_def.data[1],
+            .default_value = phyto_string_span_from_c(
+                "DOOM 2: Plutonia Experiment/p(c|f|l|n|p|r|s|t)\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|plutonia.wad"),
+            .setup_screen = doom_misc_setup_screen_none,
+        }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_owning_string_default((owning_string_default_t){
+                       .name = "demo_pattern2",
+                       .location = &doom_state->defaults_storage.demo_patterns_list_def.data[2],
+                       .default_value = phyto_string_span_from_c(
+                           "DOOM 2: TNT - Evilution/((e(c|f|v|p|r|s|t))|(tn))\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|tnt.wad"),
+                       .setup_screen = doom_misc_setup_screen_none,
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_owning_string_default((owning_string_default_t){
+                       .name = "demo_pattern3",
+                       .location = &doom_state->defaults_storage.demo_patterns_list_def.data[3],
+                       .default_value = phyto_string_span_from_c(
+                           "The Ultimate DOOM/(((e|f|n|p|r|t|u)\\dm\\d)|(n\\ds\\d)).\\d\\d\\d\\.lmp/doomu.wad"),
+                       .setup_screen = doom_misc_setup_screen_none,
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_owning_string_default((owning_string_default_t){
+                       .name = "demo_pattern4",
+                       .location = &doom_state->defaults_storage.demo_patterns_list_def.data[4],
+                       .default_value = phyto_string_span_from_c(
+                           "Alien Vendetta/a(c|f|n|p|r|s|t|v)\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|av.wad|av.deh"),
+                       .setup_screen = doom_misc_setup_screen_none,
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults,
+        s_owning_string_default((owning_string_default_t){
+            .name = "demo_pattern5",
+            .location = &doom_state->defaults_storage.demo_patterns_list_def.data[5],
+            .default_value = phyto_string_span_from_c(
+                "Requiem/r(c|f|n|p|q|r|s|t)\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|requiem.wad|req21fix.wad|reqmus.wad"),
+            .setup_screen = doom_misc_setup_screen_none,
+        }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_owning_string_default((owning_string_default_t){
+                       .name = "demo_pattern6",
+                       .location = &doom_state->defaults_storage.demo_patterns_list_def.data[6],
+                       .default_value = phyto_string_span_from_c(
+                           "Hell Revealed/h(c|e|f|n|p|r|s|t)\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|hr.wad|hrmus.wad"),
+                       .setup_screen = doom_misc_setup_screen_none,
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_owning_string_default((owning_string_default_t){
+                       .name = "demo_pattern7",
+                       .location = &doom_state->defaults_storage.demo_patterns_list_def.data[7],
+                       .default_value =
+                           phyto_string_span_from_c("Memento Mori/mm\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|mm.wad|mmmus.wad"),
+                       .setup_screen = doom_misc_setup_screen_none,
+                   }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_owning_string_default((owning_string_default_t){
+                                         .name = "demo_pattern8",
+                                         .location = &doom_state->defaults_storage.demo_patterns_list_def.data[8],
+                                         .default_value = phyto_string_span_from_c(
+                                             "Memento Mori 2/m2\\d\\d.\\d\\d\\d\\.lmp/doom2.wad|mm2.wad|mm2mus.wad"),
+                                         .setup_screen = doom_misc_setup_screen_none,
+                                     }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("Weapon preferences"));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_1",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][0],
+                                                    .default_value = 6,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_2",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][1],
+                                                    .default_value = 9,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_3",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][2],
+                                                    .default_value = 4,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_4",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][3],
+                                                    .default_value = 3,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_5",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][4],
+                                                    .default_value = 2,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_6",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][5],
+                                                    .default_value = 8,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_7",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][6],
+                                                    .default_value = 5,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_8",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][7],
+                                                    .default_value = 7,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "weapon_choice_9",
+                                                    .location = &doom_state->defaults_storage.weapon_preferences[0][8],
+                                                    .default_value = 1,
+                                                    .min_value = 0,
+                                                    .max_value = 9,
+                                                    .setup_screen = doom_misc_setup_screen_weapons,
+                                                }));
 
     return defaults;
 }
@@ -3314,5 +3462,17 @@ doom_misc_default_t s_input_default(input_default_t value) {
         .setup_screen = value.setup_screen,
         .identifier = value.identifier,
         .input = value.input,
+    };
+}
+
+doom_misc_default_t s_owning_string_default(owning_string_default_t value) {
+    return (doom_misc_default_t){
+        .name = value.name,
+        .location = {.pos = value.location},
+        .default_value = {.s = value.default_value},
+        .min_value = min_unset,
+        .max_value = max_unset,
+        .type = doom_misc_default_type_owning_string,
+        .setup_screen = value.setup_screen,
     };
 }
