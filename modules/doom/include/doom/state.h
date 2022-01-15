@@ -14,10 +14,6 @@ typedef struct {
     doom_sys_atexit_list_entry_t* exit_funcs[doom_sys_exit_priority_max];
     doom_misc_default_dyarray_t defaults;
 
-    // ========
-    // Defaults
-    // ========
-
     doom_misc_default_storage_t defaults_storage;
 } doom_state_t;
 
