@@ -785,6 +785,143 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .identifier = doom_dsda_input_strafe_right,
                                                     .input = {.key = 'd', .mouse_button = -1, .joystick_button = 5},
                                                 }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_strafe",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_strafe,
+                                         .input = {.key = doom_key_right_alt, .mouse_button = 1, .joystick_button = 1},
+                                     }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_autorun",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_autorun,
+                       .input = {.key = doom_key_caps_lock, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_reverse",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_reverse,
+                                                    .input = {.key = '/', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_use",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_use,
+                                                    .input = {.key = ' ', .mouse_button = -1, .joystick_button = 3},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_flyup",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_fly_up,
+                                                    .input = {.key = '.', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_flydown",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_fly_down,
+                                                    .input = {.key = ',', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_flycenter",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_fly_center,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_mlook",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_mouselook,
+                                                    .input = {.key = '\\', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_novert",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_novert,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon1",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon1,
+                                                    .input = {.key = '1', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon2",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon2,
+                                                    .input = {.key = '2', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon3",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon3,
+                                                    .input = {.key = '3', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon4",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon4,
+                                                    .input = {.key = '4', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon5",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon5,
+                                                    .input = {.key = '5', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon6",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon6,
+                                                    .input = {.key = '6', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon7",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon7,
+                                                    .input = {.key = '7', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon8",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon8,
+                                                    .input = {.key = '8', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_weapon9",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_weapon9,
+                                                    .input = {.key = '9', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_nextweapon",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_next_weapon,
+                       .input = {.key = doom_key_mouse_wheel_up, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_prevweapon",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_prev_weapon,
+                       .input = {.key = doom_key_mouse_wheel_down, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_toggleweapon",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_toggle_weapon,
+                                                    .input = {.key = '0', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_fire",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_fire,
+                                         .input = {.key = doom_key_right_ctrl, .mouse_button = 0, .joystick_button = 0},
+                                     }));
 
     return defaults;
 }
