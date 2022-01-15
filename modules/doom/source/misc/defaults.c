@@ -1,5 +1,6 @@
 #include "doom/misc/defaults.h"
 
+#include "doom/automap.h"
 #include "doom/dsda/input.h"
 #include "doom/gl/struct.h"
 #include "doom/hud/strings.h"
@@ -1738,6 +1739,343 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .default_value = DOOM_HUD_STRING_CHAT_MACRO_9,
                                                     .setup_screen = doom_misc_setup_screen_chat,
                                                 }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("Automap settings"));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_back",
+                                                    .location = &doom_state->defaults_storage.mapcolor_back,
+                                                    .default_value = 247,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_grid",
+                                                    .location = &doom_state->defaults_storage.mapcolor_grid,
+                                                    .default_value = 104,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_wall",
+                                                    .location = &doom_state->defaults_storage.mapcolor_wall,
+                                                    .default_value = 23,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_fchg",
+                                                    .location = &doom_state->defaults_storage.mapcolor_fchg,
+                                                    .default_value = 55,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_cchg",
+                                                    .location = &doom_state->defaults_storage.mapcolor_cchg,
+                                                    .default_value = 215,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_clsd",
+                                                    .location = &doom_state->defaults_storage.mapcolor_clsd,
+                                                    .default_value = 208,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_rkey",
+                                                    .location = &doom_state->defaults_storage.mapcolor_rkey,
+                                                    .default_value = 175,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_bkey",
+                                                    .location = &doom_state->defaults_storage.mapcolor_bkey,
+                                                    .default_value = 204,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_ykey",
+                                                    .location = &doom_state->defaults_storage.mapcolor_ykey,
+                                                    .default_value = 231,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_rdor",
+                                                    .location = &doom_state->defaults_storage.mapcolor_rdor,
+                                                    .default_value = 175,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_bdor",
+                                                    .location = &doom_state->defaults_storage.mapcolor_bdor,
+                                                    .default_value = 204,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_ydor",
+                                                    .location = &doom_state->defaults_storage.mapcolor_ydor,
+                                                    .default_value = 231,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_tele",
+                                                    .location = &doom_state->defaults_storage.mapcolor_tele,
+                                                    .default_value = 119,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_secr",
+                                                    .location = &doom_state->defaults_storage.mapcolor_secr,
+                                                    .default_value = 252,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_revsecr",
+                                                    .location = &doom_state->defaults_storage.mapcolor_revsecr,
+                                                    .default_value = 112,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_exit",
+                                                    .location = &doom_state->defaults_storage.mapcolor_exit,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_unsn",
+                                                    .location = &doom_state->defaults_storage.mapcolor_unsn,
+                                                    .default_value = 104,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_flat",
+                                                    .location = &doom_state->defaults_storage.mapcolor_flat,
+                                                    .default_value = 88,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_sprt",
+                                                    .location = &doom_state->defaults_storage.mapcolor_sprt,
+                                                    .default_value = 112,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_item",
+                                                    .location = &doom_state->defaults_storage.mapcolor_item,
+                                                    .default_value = 231,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_hair",
+                                                    .location = &doom_state->defaults_storage.mapcolor_hair,
+                                                    .default_value = 208,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_sngl",
+                                                    .location = &doom_state->defaults_storage.mapcolor_sngl,
+                                                    .default_value = 208,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_me",
+                                                    .location = &doom_state->defaults_storage.mapcolor_me,
+                                                    .default_value = 112,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_enemy",
+                                                    .location = &doom_state->defaults_storage.mapcolor_enemy,
+                                                    .default_value = 177,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "mapcolor_frnd",
+                                                    .location = &doom_state->defaults_storage.mapcolor_frnd,
+                                                    .default_value = 112,
+                                                    .min_value = 0,
+                                                    .max_value = 255,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_secret_after",
+                                                    .location = &doom_state->defaults_storage.map_secret_after,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_point_coord",
+                                                    .location = &doom_state->defaults_storage.map_point_coord,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_level_stat",
+                                                    .location = &doom_state->defaults_storage.map_level_stat,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_hexint_default((integer_default_t){
+                                                    .name = "automapmode",
+                                                    .location = (int*)&doom_state->defaults_storage.automapmode,
+                                                    .default_value = doom_automap_mode_follow,
+                                                    .min_value = 0,
+                                                    .max_value = 31,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_always_updates",
+                                                    .location = &doom_state->defaults_storage.map_always_updates,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_grid_size",
+                                                    .location = &doom_state->defaults_storage.map_grid_size,
+                                                    .default_value = 128,
+                                                    .min_value = 8,
+                                                    .max_value = 256,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_scroll_speed",
+                                                    .location = &doom_state->defaults_storage.map_scroll_speed,
+                                                    .default_value = 8,
+                                                    .min_value = 1,
+                                                    .max_value = 32,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_wheel_zoom",
+                                                    .location = &doom_state->defaults_storage.map_wheel_zoom,
+                                                    .default_value = true,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_use_multisampling",
+                                                    .location = &doom_state->defaults_storage.map_use_multisampling,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_boolean_default((boolean_default_t){
+                                                    .name = "map_textured",
+                                                    .location = &doom_state->defaults_storage.map_textured,
+                                                    .default_value = false,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_textured_trans",
+                                                    .location = &doom_state->defaults_storage.map_textured_translucency,
+                                                    .default_value = 100,
+                                                    .min_value = 0,
+                                                    .max_value = 100,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "map_textured_overlay_trans",
+                                         .location = &doom_state->defaults_storage.map_textured_overlay_translucency,
+                                         .default_value = 66,
+                                         .min_value = 0,
+                                         .max_value = 100,
+                                         .setup_screen = doom_misc_setup_screen_auto,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "map_lines_overlay_trans",
+                                         .location = &doom_state->defaults_storage.map_lines_overlay_translucency,
+                                         .default_value = 100,
+                                         .min_value = 0,
+                                         .max_value = 100,
+                                         .setup_screen = doom_misc_setup_screen_auto,
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_overlay_pos_x",
+                                                    .location = &doom_state->defaults_storage.map_overlay_pos_x,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 319,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_overlay_pos_y",
+                                                    .location = &doom_state->defaults_storage.map_overlay_pos_y,
+                                                    .default_value = 0,
+                                                    .min_value = 0,
+                                                    .max_value = 199,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_overlay_pos_width",
+                                                    .location = &doom_state->defaults_storage.map_overlay_pos_width,
+                                                    .default_value = 320,
+                                                    .min_value = 0,
+                                                    .max_value = 320,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_integer_default((integer_default_t){
+                                                    .name = "map_overlay_pos_height",
+                                                    .location = &doom_state->defaults_storage.map_overlay_pos_height,
+                                                    .default_value = 200,
+                                                    .min_value = 0,
+                                                    .max_value = 200,
+                                                    .setup_screen = doom_misc_setup_screen_auto,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_integer_default((integer_default_t){
+                                         .name = "map_things_appearance",
+                                         .location = (int*)&doom_state->defaults_storage.map_things_appearance,
+                                         .default_value = doom_automap_things_appearance_count - 1,
+                                         .min_value = 0,
+                                         .max_value = doom_automap_things_appearance_count - 1,
+                                         .setup_screen = doom_misc_setup_screen_auto,
+                                     }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("Heads-up display settings"));
 
     return defaults;
 }
