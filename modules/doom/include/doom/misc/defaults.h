@@ -179,7 +179,7 @@ typedef struct {
     /// This is used to identify the default in the input configuration, because the DSDA subsystem doesn't use the
     /// pointer fields.
     ///
-    int32_t identifier;
+    doom_dsda_input_identifier_t identifier;
 
     ///
     /// \brief (DSDA-Doom) The default for an input, if it is not configured.

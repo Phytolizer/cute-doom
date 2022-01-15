@@ -922,6 +922,399 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                          .identifier = doom_dsda_input_fire,
                                          .input = {.key = doom_key_right_ctrl, .mouse_button = 0, .joystick_button = 0},
                                      }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_setup",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_setup,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_pause",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_pause,
+                                         .input = {.key = doom_key_pause, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_map",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_map,
+                                         .input = {.key = doom_key_tab, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_soundvolume",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_sound_volume,
+                                         .input = {.key = doom_key_f4, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_hud",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_hud,
+                                         .input = {.key = doom_key_f5, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_messages",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_messages,
+                                         .input = {.key = doom_key_f8, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_gamma",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_gamma,
+                                         .input = {.key = doom_key_f11, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_spy",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_spy,
+                                         .input = {.key = doom_key_f12, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_zoomin",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_zoom_in,
+                                                    .input = {.key = '=', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_zoomout",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_zoom_out,
+                                                    .input = {.key = '-', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_screenshot",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_screenshot,
+                                                    .input = {.key = '*', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_savegame",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_save_game,
+                                         .input = {.key = doom_key_f2, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_loadgame",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_load_game,
+                                         .input = {.key = doom_key_f3, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_quicksave",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_quick_save,
+                                         .input = {.key = doom_key_f6, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_quickload",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_quick_load,
+                                         .input = {.key = doom_key_f9, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_endgame",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_end_game,
+                                         .input = {.key = doom_key_f7, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_quit",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_quit,
+                                         .input = {.key = doom_key_f10, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_follow",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_follow,
+                                                    .input = {.key = 'f', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_zoomin",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_zoom_in,
+                                                    .input = {.key = '=', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_zoomout",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_zoom_out,
+                                                    .input = {.key = '-', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_map_up",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_map_up,
+                                         .input = {.key = doom_key_up_arrow, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_map_down",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_map_down,
+                       .input = {.key = doom_key_down_arrow, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_map_left",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_map_left,
+                       .input = {.key = doom_key_left_arrow, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_map_right",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_map_right,
+                       .input = {.key = doom_key_right_arrow, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_mark",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_mark,
+                                                    .input = {.key = 'm', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_clear",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_clear,
+                                                    .input = {.key = 'c', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_gobig",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_go_big,
+                                                    .input = {.key = '0', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_grid",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_grid,
+                                                    .input = {.key = 'g', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_rotate",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_rotate,
+                                                    .input = {.key = 'r', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_overlay",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_overlay,
+                                                    .input = {.key = 'o', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_map_textured",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_map_textured,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_chat",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_chat,
+                                                    .input = {.key = 't', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_chat_dest0",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_chat_dest0,
+                                                    .input = {.key = 'g', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_chat_dest1",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_chat_dest1,
+                                                    .input = {.key = 'i', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_chat_dest2",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_chat_dest2,
+                                                    .input = {.key = 'b', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_chat_dest3",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_chat_dest3,
+                                                    .input = {.key = 'r', .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_chat_backspace",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_chat_backspace,
+                       .input = {.key = doom_key_backspace, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_chat_enter",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_chat_enter,
+                                         .input = {.key = doom_key_enter, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_speed_up",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_speed_up,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_speed_down",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_speed_down,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_speed_default",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_speed_default,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_demo_skip",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_demo_skip,
+                                         .input = {.key = doom_key_insert, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_demo_endlevel",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_demo_end_level,
+                                         .input = {.key = doom_key_end, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_walkcamera",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_walk_camera,
+                                         .input = {.key = doom_key_keypad0, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_join_demo",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_join_demo,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_restart",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_restart,
+                                         .input = {.key = doom_key_home, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_nextlevel",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_next_level,
+                       .input = {.key = doom_key_page_down, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_showalive",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_show_alive,
+                       .input = {.key = doom_key_keypad_divide, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_menu_down",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_menu_down,
+                       .input = {.key = doom_key_down_arrow, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_menu_up",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_menu_up,
+                                         .input = {.key = doom_key_up_arrow, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_menu_left",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_menu_left,
+                       .input = {.key = doom_key_left_arrow, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_menu_right",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_menu_right,
+                       .input = {.key = doom_key_right_arrow, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(
+        &defaults, s_input_default((input_default_t){
+                       .name = "input_menu_backspace",
+                       .setup_screen = doom_misc_setup_screen_keys,
+                       .identifier = doom_dsda_input_menu_backspace,
+                       .input = {.key = doom_key_backspace, .mouse_button = -1, .joystick_button = -1},
+                   }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_menu_enter",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_menu_enter,
+                                         .input = {.key = doom_key_enter, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_menu_escape",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_menu_escape,
+                                         .input = {.key = doom_key_escape, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults,
+                                     s_input_default((input_default_t){
+                                         .name = "input_menu_clear",
+                                         .setup_screen = doom_misc_setup_screen_keys,
+                                         .identifier = doom_dsda_input_menu_clear,
+                                         .input = {.key = doom_key_delete, .mouse_button = -1, .joystick_button = -1},
+                                     }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_iddqd",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_iddqd,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_idkfa",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_idkfa,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_idfa",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_idfa,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_input_default((input_default_t){
+                                                    .name = "input_idclip",
+                                                    .setup_screen = doom_misc_setup_screen_keys,
+                                                    .identifier = doom_dsda_input_idclip,
+                                                    .input = {.key = 0, .mouse_button = -1, .joystick_button = -1},
+                                                }));
 
     return defaults;
 }
