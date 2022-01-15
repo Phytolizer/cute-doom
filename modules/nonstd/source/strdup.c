@@ -21,6 +21,9 @@ char* nonstd_strndup(const char* str, size_t n) {
 }
 
 void* nonstd_memdup(const void* mem, size_t nbytes) {
+    if (nbytes == 0) {
+        return NULL;
+    }
     void* result = malloc(nbytes);
     memcpy(result, mem, nbytes);
     return result;
