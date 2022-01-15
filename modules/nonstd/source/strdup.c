@@ -13,7 +13,9 @@ char* nonstd_strdup(const char* str) {
 
 char* nonstd_strndup(const char* str, size_t n) {
     char* result = malloc(n + 1);
-    memcpy(result, str, n);
+    if (n > 0) {
+        memcpy(result, str, n);
+    }
     result[n] = '\0';
     return result;
 }

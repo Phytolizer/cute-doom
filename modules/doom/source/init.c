@@ -2,6 +2,7 @@
 
 #include "doom/log/printf.h"
 #include "doom/misc/argv.h"
+#include "doom/misc/defaults.h"
 #include "doom/state.h"
 #include "doom/sys/system.h"
 
@@ -13,6 +14,7 @@ static void s_print_version(void);
 
 void doom_init(int argc, char** argv) {
     doom_state = doom_state_new(argc, argv);
+    doom_state->defaults = doom_misc_default_dyarray_new();
 
     if (doom_misc_check_parameter("-v") > 0) {
         s_print_version();

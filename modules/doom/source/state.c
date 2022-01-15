@@ -17,7 +17,6 @@ doom_state_t* doom_state_new(int argc, char** argv) {
     for (int i = 0; i < argc; i++) {
         doom_misc_parameters_append(&state->params, phyto_string_from_c(argv[i]));
     }
-    state->defaults = doom_misc_default_dyarray_new();
     return state;
 }
 
