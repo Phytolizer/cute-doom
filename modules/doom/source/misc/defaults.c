@@ -2,6 +2,7 @@
 
 #include "doom/dsda/input.h"
 #include "doom/gl/struct.h"
+#include "doom/hud/strings.h"
 #include "doom/init.h"
 #include "doom/keys.h"
 #include "doom/render/demo.h"
@@ -1674,6 +1675,68 @@ doom_misc_default_dyarray_t doom_misc_default_dyarray_new(void) {
                                                     .min_value = 0,
                                                     .max_value = 2,
                                                     .setup_screen = doom_misc_setup_screen_none,
+                                                }));
+
+    doom_misc_default_dyarray_append(&defaults, s_header_default("Chat macros"));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro0",
+                                                    .location = &doom_state->defaults_storage.chat_macros[0],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_0,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro1",
+                                                    .location = &doom_state->defaults_storage.chat_macros[1],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_1,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro2",
+                                                    .location = &doom_state->defaults_storage.chat_macros[2],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_2,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro3",
+                                                    .location = &doom_state->defaults_storage.chat_macros[3],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_3,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro4",
+                                                    .location = &doom_state->defaults_storage.chat_macros[4],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_4,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro5",
+                                                    .location = &doom_state->defaults_storage.chat_macros[5],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_5,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro6",
+                                                    .location = &doom_state->defaults_storage.chat_macros[6],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_6,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro7",
+                                                    .location = &doom_state->defaults_storage.chat_macros[7],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_7,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro8",
+                                                    .location = &doom_state->defaults_storage.chat_macros[8],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_8,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
+                                                }));
+    doom_misc_default_dyarray_append(&defaults, s_string_default((string_default_t){
+                                                    .name = "chatmacro9",
+                                                    .location = &doom_state->defaults_storage.chat_macros[9],
+                                                    .default_value = DOOM_HUD_STRING_CHAT_MACRO_9,
+                                                    .setup_screen = doom_misc_setup_screen_chat,
                                                 }));
 
     return defaults;
