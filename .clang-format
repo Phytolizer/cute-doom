@@ -1,5 +1,0 @@
----
-BasedOnStyle: Microsoft
-BreakBeforeBraces: Attach
-PointerAlignment: Left
-IncludeBlocks: Regroup
